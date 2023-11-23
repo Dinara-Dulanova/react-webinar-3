@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.code = this.state.list.length; //начальное значение кода после добавления
   }
 
   /**
@@ -42,9 +43,10 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    this.code = this.code + 1;
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: this.code, title: 'Новая запись', selectedCount: 0}]
     })
   };
 
@@ -63,13 +65,26 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(code) {
+
+   countSelectedClick (item){
+    if (item.selected) {
+      item.selectedCount = item.selectedCount + 1;
+    }
+   }
+
+   selectItem(code) {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
+        
         if (item.code === code) {
           item.selected = !item.selected;
+          this.countSelectedClick(item);
         }
+        else {
+          item.selected = false;   //сбрасываем выделения у других записей
+        }
+        console.log(item);
         return item;
       })
     })
