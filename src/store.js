@@ -84,7 +84,6 @@ class Store {
         else {
           item.selected = false;   //сбрасываем выделения у других записей
         }
-        console.log(item);
         return item;
       })
     })

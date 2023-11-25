@@ -27,7 +27,6 @@ function App({store}) {
   function showTitleAndSelectedCount(item) {
     let word = endingInSelectedCount(item.selectedCount);
     
-    
     if (item.selectedCount === 0) {
       return <div className='Item-title'>{item.title}</div>
     } else {
@@ -53,7 +52,11 @@ function App({store}) {
                 <div className='Item-code' >{item.code} </div>
                 {showTitleAndSelectedCount(item) }
                 <div className='Item-actions'>
-                  <button onClick={() => store.deleteItem(item.code)}>
+                  <button onClick={(e) => {
+                   e.stopPropagation();
+                   store.deleteItem(item.code); 
+                  }
+                  }>
                     Удалить
                   </button>
                 </div>
