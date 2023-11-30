@@ -1,12 +1,16 @@
 .Item {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   transition: background-color 1s;
 }
 
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
+.Item-codeAndTitle {
+  display: flex;
+}
+
+.Item-priceAndActions {
+  display: flex;
+  align-items: center;
 }
 
 .Item-code {
@@ -16,6 +20,15 @@
 .Item-title {
   width: 100%;
   padding: 20px 10px;
+}
+
+.Item-price {
+  
+  padding: 20px 10px;
+}
+
+.Item-count {
+  margin: 0 24px 0 64px;
 }
 
 .Item-actions {

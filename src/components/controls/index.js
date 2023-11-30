@@ -2,10 +2,15 @@ import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
 
-function Controls({onAdd}) {
+function Controls({onCartPopup, cartSumm, uniqItemCount}) {
   return (
     <div className='Controls'>
-      <button onClick={() => onAdd()}>Добавить</button>
+      <div className='Controls-cartInfo'>В корзине:
+        <div className="summAndCount">
+          {cartSumm === 0 ? 'Пусто' : `${uniqItemCount} товара / ${cartSumm} ₽`}
+        </div>
+      </div>
+      <button className='Controls-button' onClick={() => onCartPopup()}>Перейти</button>
     </div>
   )
 }

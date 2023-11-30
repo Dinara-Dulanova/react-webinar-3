@@ -3,3 +3,27 @@
   justify-content: flex-end;
   padding: 20px;
 }
+
+.Controls-cartInfo {
+  display: flex;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.summAndCount {
+  padding: 0 20px 0 15px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.Controls-button {
+  width: 76px;
+}

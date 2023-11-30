@@ -4,39 +4,24 @@ import {plural} from "../../utils";
 import './style.css';
 
 function Item(props) {
-
-  // Счётчик выделений
-  const [count, setCount] = useState(0);
-
-  const callbacks = {
-    onClick: () => {
-      props.onSelect(props.item.code);
-      if (!props.item.selected) {
-        setCount(count + 1);
-      }
-    },
-    onDelete: (e) => {
-      e.stopPropagation();
-      props.onDelete(props.item.code);
-
-    }
-  }
+  const itemCountInOrderList = props.list.find((elem) => elem.code === props.item.code); //ищем сколько раз добавли товар
 
   return (
-    <div className={'Item' + (props.item.selected ? ' Item_selected' : '')}
-         onClick={callbacks.onClick}>
-      <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>
-        {props.item.title} {count ? ` | Выделяли ${count} ${plural(count, {
-        one: 'раз',
-        few: 'раза',
-        many: 'раз'
-      })}` : ''}
+    <div className='Item'>
+      <div className='Item-codeAndTitle'>
+        <div className='Item-code'>{props.item.code}</div>
+        <div className='Item-title'>{props.item.title}</div>
       </div>
-      <div className='Item-actions'>
-        <button onClick={callbacks.onDelete}>
-          Удалить
-        </button>
+      <div className='Item-priceAndActions'>
+        <div className='Item-price'>{props.item.price} ₽</div>
+        {props.countRow && (
+          <div className='Item-count'> {itemCountInOrderList.count} шт.</div>
+        )}
+        <div className='Item-actions'>
+          <button onClick= {() => props.onAction(props.item)}>
+            {props.buttonText}
+         </button>
+      </div>
       </div>
     </div>
   );
@@ -50,13 +35,16 @@ Item.propTypes = {
     count: PropTypes.number
   }).isRequired,
   onDelete: PropTypes.func,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
+  onAddToCart: PropTypes.func,
 };
 
 Item.defaultProps = {
   onDelete: () => {
   },
   onSelect: () => {
+  },
+  onAddToCart: () => {
   },
 }
 
