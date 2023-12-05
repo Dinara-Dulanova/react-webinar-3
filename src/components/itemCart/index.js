@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import {plural} from "../../utils";
 import './style.css';
 
-function Item(props) {
+function ItemCart(props) {
+  const itemCountInOrderList = props.list.find((elem) => elem.code === props.item.code); //ищем сколько раз добавли товар
+  //console.log("List "+ props.list);
   return (
     <div className='Item'>
       <div className='Item-codeAndTitle'>
@@ -12,17 +14,18 @@ function Item(props) {
       </div>
       <div className='Item-priceAndActions'>
         <div className='Item-price'>{props.item.price.toLocaleString()} ₽</div>
+        <div className='Item-count'> {itemCountInOrderList.count} шт.</div>
         <div className='Item-actions'>
-          <button onClick= {() => props.onAction(props.item.code, 1, props.item.price)}>
-            Добавить
-          </button>
+          <button onClick= {() => props.onAction(props.item.code, props.item.count, props.item.price)}>
+            Удалить
+         </button>
         </div>
       </div>
     </div>
   );
 }
 
-Item.propTypes = {
+ItemCart.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
@@ -34,7 +37,7 @@ Item.propTypes = {
   onAddToCart: PropTypes.func,
 };
 
-Item.defaultProps = {
+ItemCart.defaultProps = {
   onDelete: () => {
   },
   onSelect: () => {
@@ -43,4 +46,4 @@ Item.defaultProps = {
   },
 }
 
-export default React.memo(Item);
+export default React.memo(ItemCart);

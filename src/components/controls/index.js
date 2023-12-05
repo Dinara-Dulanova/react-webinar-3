@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {plural} from "../../utils";
 import './style.css';
 
 function Controls({onCartPopup, cartSumm, uniqItemCount}) {
@@ -7,7 +8,11 @@ function Controls({onCartPopup, cartSumm, uniqItemCount}) {
     <div className='Controls'>
       <div className='Controls-cartInfo'>В корзине:
         <div className="summAndCount">
-          {cartSumm === 0 ? 'Пусто' : `${uniqItemCount} товара / ${cartSumm} ₽`}
+          {uniqItemCount === 0 ? 'Пусто' : `${uniqItemCount} ${plural(uniqItemCount, {
+        one: 'товар',
+        few: 'товара',
+        many: 'товаров'
+      })} / ${cartSumm.toLocaleString()} ₽`}
         </div>
       </div>
       <button className='Controls-button' onClick={() => onCartPopup()}>Перейти</button>

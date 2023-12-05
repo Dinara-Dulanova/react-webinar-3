@@ -5,7 +5,11 @@ import {generateCode} from "./utils";
  */
 class Store {
   constructor(initState = {}) {
-    this.state = initState;
+    this.state = {
+      list: [],
+      cartList: [],
+      ...initState,
+    };
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -82,6 +86,39 @@ class Store {
       })
     })
   }
+
+  addItemToCart(code, count) {
+    const { cartList, list } = this.state;
+    const existingItem = cartList.find(item => item.code === code);
+
+    if (existingItem) {
+      const updatedCart = cartList.map(item =>
+        item.code === code ? { ...item, count: item.count + count } : item
+      );
+
+      this.setState({
+        ...this.state ,
+        cartList: updatedCart,
+      });
+    } else {
+      const selectedItem = list.find((item) => item.code === code);
+      if (selectedItem) {
+        this.setState({
+          ...this.state,
+          cartList: [...cartList, { ...selectedItem, count }],
+        });
+      }
+    }
+  }
+
+  removeItemFromCart(code) {
+    const updatedCart = this.state.cartList.filter((item) => item.code !== code);
+    this.setState({
+      ...this.state,
+      cartList: updatedCart,
+    });
+  }
 }
+
 
 export default Store;
