@@ -10,7 +10,8 @@ class Catalog extends StoreModule {
 
   initState() {
     return {
-      list: []
+      list: [],
+      listPage: []
     }
   }
 
@@ -21,6 +22,17 @@ class Catalog extends StoreModule {
       ...this.getState(),
       list: json.result.items
     }, 'Загружены товары из АПИ');
+  }
+
+  async pang(limit, skip) {
+    const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(_id, title, price),count`);
+    const json = await response.json();
+    console.log(json);
+    this.setState({
+      ...this.getState(),
+      listPage: json.result.items,
+      count: json.result.count
+    }, 'Пангинация');
   }
 }
 
