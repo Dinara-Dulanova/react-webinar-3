@@ -3,6 +3,8 @@ import Main from "./main";
 import Basket from "./basket";
 import useStore from "../store/use-store";
 import useSelector from "../store/use-selector";
+import {BrowserRouter, Routes,Route, Redirect} from "react-router-dom";
+import ItemCard from '../components/item-card';
 
 /**
  * Приложение
@@ -14,8 +16,13 @@ function App() {
 
   return (
     <>
-      <Main/>
-      {activeModal === 'basket' && <Basket/>}
+      <BrowserRouter>
+      <Routes>
+        <Route exact path="/*" element={<Main />} />
+        <Route path="/itemCard/:id" element={<ItemCard />} />
+        </Routes>
+        {activeModal === 'basket' && <Basket/>}
+      </BrowserRouter>
     </>
   );
 }

@@ -22,7 +22,6 @@ function Main() {
   useEffect(() => {
     const lastItemIndex = currentPage * itemsPerPage
     const firstItemIndex = lastItemIndex - itemsPerPage
-    console.log("firstItemIndex " + firstItemIndex +" lastItemIndex "+ lastItemIndex);
     store.actions.catalog.pang(10, firstItemIndex);
   }, [currentPage, itemsPerPage]);
 
@@ -34,7 +33,6 @@ function Main() {
     count: state.catalog.count,
     amount: state.basket.amount,
     sum: state.basket.sum,
-
   }));
 
   const callbacks = {

@@ -34,6 +34,7 @@ class Catalog extends StoreModule {
       count: json.result.count
     }, 'Пангинация');
   }
+
 }
 
 export default Catalog;
