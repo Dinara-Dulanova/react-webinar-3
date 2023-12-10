@@ -25,8 +25,6 @@ function Main() {
     store.actions.catalog.pang(10, firstItemIndex);
   }, [currentPage, itemsPerPage]);
 
-
-
   const select = useSelector(state => ({
     list: state.catalog.list,
     listPage: state.catalog.listPage,
@@ -62,7 +60,8 @@ function Main() {
             renderItem={renders.item}/>
       <Pagination itemsPerPage={itemsPerPage} 
                   totalItems ={select.count}
-                  paginate={paginate}></Pagination>
+                  paginate={paginate}
+                  currentPage={currentPage}></Pagination>
     </PageLayout>
 
   );

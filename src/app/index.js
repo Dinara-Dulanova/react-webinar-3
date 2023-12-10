@@ -1,10 +1,9 @@
 import {useCallback, useContext, useEffect, useState} from 'react';
 import Main from "./main";
 import Basket from "./basket";
-import useStore from "../store/use-store";
 import useSelector from "../store/use-selector";
-import {BrowserRouter, Routes,Route, Redirect} from "react-router-dom";
-import ItemCard from '../components/item-card';
+import {BrowserRouter, Routes,Route} from "react-router-dom";
+import ItemCard from '../app/item-card';
 
 /**
  * Приложение

@@ -1,34 +1,35 @@
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import {React,  useState, useCallback} from "react";
+import {useParams} from "react-router-dom";
 import Head from "../head";
-import ItemInfo from "../../store/item-info";
-import BasketTool from "../../components/basket-tool";
+import BasketTool from "../basket-tool";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import Pagination from '../../pagination';
+import ModalLayout from "../modal-layout";
+import './style.css';
 
 
 
-const ItemCard = () => {
-  const { id } = useParams();
-  const [itemData, setItemData] = useState({});
+function ItemCardInfo (props) {
 
-  const onDataLoaded = (data) => {
-    setItemData(data);
-  };
+ console.log(props.itemCard?._id)
+  const callbacks = {
+    onAdd: (e) => props.onAdd(props.itemCard?._id)
+  }
 
   return (
     <>
-      <ItemInfo id={id} onDataLoaded={onDataLoaded} />
-      <Head title={itemData.title}></Head>
-      <Link to="/main" className="itemCard-onMain">Главная</Link>
-      <div className='Item_info'>
-        <div>{itemData.description}</div>
-        <div>Страна производитель: {itemData.madeIn && itemData.madeIn.title}</div>
-        <div>Год выпуска: {itemData.edition}</div>
+    <div className='ItemInfo'>
+      <div className='ItemInfo_container'>
+        <div className='ItemInfo_description'>{props.itemCard?.description}</div>
+        <div className="ItemInfo_label">Страна производитель: <span className="ItemInfo_value"> {props.itemCard?.madeIn && props.itemCard?.madeIn.title} </span></div>
+        <div className="ItemInfo_label">Категория: <span className="ItemInfo_value">{props.itemCard?.category.title}</span></div>
+        <div className="ItemInfo_label">Год выпуска: <span className="ItemInfo_value">{props.itemCard?.edition}</span></div>
+        <div className="ItemInfo_label">Цена: <span className="ItemInfo_value">{props.itemCard?.price}</span></div>
+        <button className="ItemInfo_addButton" onClick={callbacks.onAdd}>Добавить</button>
+      </div>
       </div>
     </>
   );
 };
 
-export default ItemCard;
+export default ItemCardInfo;
