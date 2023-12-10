@@ -10,15 +10,13 @@ function Item(props) {
   const cn = bem('Item');
 
   const callbacks = {
-    onAdd: (e) => props.onAdd(props.item._id)
+    onAdd: (e) => props.onAdd(props.item._id),
+    navigateToItemCard: (e) => props.navigateToItemCard(props.item._id)
   }
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <Link to={`/itemCard/${props.item._id}`} className={cn('title')}>
-        {props.item.title}
-      </Link>
+      <div className={cn('title')} onClick={callbacks.navigateToItemCard}>{props.item.title}</div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
         <button onClick={callbacks.onAdd}>Добавить</button>

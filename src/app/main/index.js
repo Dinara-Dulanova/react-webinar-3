@@ -1,16 +1,18 @@
 import {memo, useCallback, useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
 import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../pagination';
+import Navigation from '../../components/navigation';
 
 function Main() {
 
   const store = useStore();
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
@@ -38,11 +40,13 @@ function Main() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    navigateToItemCard: useCallback((_id) => (navigate(`/itemCard/${_id}`), [store])
+    )
   }
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
+      return <Item item={item} onAdd={callbacks.addToBasket} navigateToItemCard={callbacks.navigateToItemCard}/>
     }, [callbacks.addToBasket]),
   };
 
@@ -54,8 +58,9 @@ function Main() {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
+      <Navigation openModalBasket= {callbacks.openModalBasket}
+                  amount={select.amount}
+                  sum={select.sum}></Navigation>
       <List list={select.listPage} 
             renderItem={renders.item}/>
       <Pagination itemsPerPage={itemsPerPage} 

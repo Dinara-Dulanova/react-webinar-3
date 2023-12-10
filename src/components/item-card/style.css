@@ -1,24 +1,24 @@
 .ItemInfo {
   width: calc(100% - 80px);
-  margin:  0 auto;
+  margin:  21px auto 0;
 }
-.ItemInfo_label {
+.ItemInfo_value {
   font-family: Arial;
   font-size: 18px;
   font-weight: 700;
   line-height: 21px;
   letter-spacing: 0em;
   text-align: left;
-  margin-top: 20px;
 }
 
-.ItemInfo_value {
+.ItemInfo_label {
   font-family: Arial;
   font-size: 18px;
   font-weight: 400;
   line-height: 21px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 20px;
 }
 
 .ItemInfo_description {
@@ -27,4 +27,22 @@
 
 .ItemInfo_addButton {
   margin-top: 20px;
+}
+
+.ItemInfo_price {
+  font-family: Arial;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.ItemInfo_value-price {
+  font-family: Arial;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
 }

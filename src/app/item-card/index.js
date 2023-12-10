@@ -1,14 +1,11 @@
 import {React,  useState, useCallback, memo, useEffect} from "react";
-import {useParams, Link} from "react-router-dom";
-import ItemBasket from "../../components/item-basket";
+import {useParams} from "react-router-dom";
 import Head from "../../components/head";
-import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import BasketTool from "../../components/basket-tool";
 import ItemCardInfo from "../../components/item-card";
-import Menu from "../../components/menu";
 import PageLayout from "../../components/page-layout";
+import Navigation from '../../components/navigation';
 
 function ItemCard() {
 
@@ -43,11 +40,9 @@ function ItemCard() {
     <>
     <PageLayout>
       <Head title={ select.itemCard?.title}></Head>
-      <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-        <Menu />
-        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                    sum={select.sum}/>
-      </div>
+      <Navigation openModalBasket= {callbacks.openModalBasket}
+                  amount={select.amount}
+                  sum={select.sum}></Navigation>
       <ItemCardInfo itemCard={select.itemCard} onAdd={callbacks.addToBasket}></ItemCardInfo>
     </PageLayout>
     </>

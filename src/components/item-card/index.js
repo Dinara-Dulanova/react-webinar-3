@@ -1,10 +1,5 @@
-import {React,  useState, useCallback} from "react";
-import {useParams} from "react-router-dom";
-import Head from "../head";
-import BasketTool from "../basket-tool";
-import useStore from "../../store/use-store";
-import useSelector from "../../store/use-selector";
-import ModalLayout from "../modal-layout";
+import {React} from "react";
+import {numberFormat} from "../../utils";
 import './style.css';
 
 
@@ -24,10 +19,10 @@ function ItemCardInfo (props) {
         <div className="ItemInfo_label">Страна производитель: <span className="ItemInfo_value"> {props.itemCard?.madeIn && props.itemCard?.madeIn.title} </span></div>
         <div className="ItemInfo_label">Категория: <span className="ItemInfo_value">{props.itemCard?.category.title}</span></div>
         <div className="ItemInfo_label">Год выпуска: <span className="ItemInfo_value">{props.itemCard?.edition}</span></div>
-        <div className="ItemInfo_label">Цена: <span className="ItemInfo_value">{props.itemCard?.price}</span></div>
+        <div className="ItemInfo_label ItemInfo_price">Цена: <span className="ItemInfo_value ItemInfo_value-price">{numberFormat(props.itemCard?.price)} ₽</span></div>
         <button className="ItemInfo_addButton" onClick={callbacks.onAdd}>Добавить</button>
       </div>
-      </div>
+    </div>
     </>
   );
 };
