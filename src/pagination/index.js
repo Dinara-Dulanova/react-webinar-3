@@ -6,7 +6,9 @@ const Pagination = ({itemsPerPage, totalItems, paginate, currentPage}) => {
   const totalPages = Math.ceil(totalItems/itemsPerPage);
   
   if (totalPages <= 4) {
-    pageNumbers = [1, 2, 3, 4];
+    for (let i = 1; i <=totalPages; i++) {
+      pageNumbers.push(i);
+    }
   } else if (currentPage <= 2){
     pageNumbers = [1, 2, 3, '...', totalPages];
   } else if (currentPage === 3) {
